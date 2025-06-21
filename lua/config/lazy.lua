@@ -22,15 +22,15 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
 	spec = {
 		{
-			"folke/tokyonight.nvim",
+			'datsfilipe/vesper.nvim',
 			config = function()
-				vim.cmd.colorscheme "tokyonight"
+				vim.o.background = "dark"
+				vim.cmd.colorscheme "vesper"
 			end
 		},
 		{
 			"mason-org/mason.nvim",
-			build = ":MasonUpdate",
-			config = function() require("mason").setup() end
+			opts = {}
 		},
 		-- import/override with your plugins
 		{ import = "config.plugins" },
