@@ -21,13 +21,13 @@ vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
 	spec = {
-		{
-			'datsfilipe/vesper.nvim',
-			config = function()
-				vim.o.background = "dark"
-				vim.cmd.colorscheme "vesper"
-			end
-		},
+{
+		'datsfilipe/vesper.nvim',
+		config = function()
+			vim.o.background = "dark"
+			vim.cmd.colorscheme "vesper"
+		end
+	},
 		{
 			"mason-org/mason.nvim",
 			opts = {}

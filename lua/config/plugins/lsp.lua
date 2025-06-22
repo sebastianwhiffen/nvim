@@ -2,24 +2,52 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-
-			    'saghen/blink.cmp',
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"saghen/blink.cmp",
 			{
 				"folke/lazydev.nvim",
-				ft = "lua", -- only load on lua files
+				ft = "lua",
 				opts = {
 					library = {
-						-- See the configuration section for more details
-						-- Load luvit types when the `vim.uv` word is found
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 					},
 				},
 			},
 		},
 		config = function()
-			local capabilities = require('blink.cmp').get_lsp_capabilities()
-			require("lspconfig").lua_ls.setup { capabilities = capabilities }
-		end
-	}
+			require("mason").setup()
+			require("mason-lspconfig").setup {
+				ensure_installed = { "lua_ls", "rust_analyzer" },
+			}
 
+			vim.keymap.set("n", "gd", function()
+				vim.lsp.buf.definition()
+			end, { silent = true })
+
+			vim.diagnostic.config({
+				virtual_text     = true,
+				signs            = true,
+				underline        = true,
+				update_in_insert = true,
+			})
+
+			vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references({}) end,
+				{ noremap = true, silent = true })
+
+			vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+
+			local caps = require("blink.cmp").get_lsp_capabilities()
+			require("lspconfig").lua_ls.setup { capabilities = caps }
+			require("lspconfig").rust_analyzer.setup { capabilities = caps }
+
+			vim.keymap.set("v", "<C-k>c", function()
+				vim.lsp.buf.code_action()
+			end, { silent = true })
+
+			vim.keymap.set("v", "<C-k>u", function()
+				vim.lsp.buf.code_action()
+			end, { silent = true })
+		end,
+	},
 }
