@@ -41,8 +41,11 @@ return {
 			require("lspconfig").lua_ls.setup { capabilities = caps }
 			require("lspconfig").rust_analyzer.setup { settings = {
 				["rust-analyzer"] = {
+				    cargo = {
+				    allFeatures = true
+				    }
 				},
-			}, capabilities = caps }
+			    }, capabilities = caps }
 
 			vim.keymap.set("n", "gn", function()
 				vim.lsp.buf.rename()
