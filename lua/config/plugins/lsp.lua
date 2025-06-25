@@ -39,7 +39,18 @@ return {
 
 			local caps = require("blink.cmp").get_lsp_capabilities()
 			require("lspconfig").lua_ls.setup { capabilities = caps }
-			require("lspconfig").rust_analyzer.setup { capabilities = caps }
+			require("lspconfig").rust_analyzer.setup { settings = {
+				["rust-analyzer"] = {
+				},
+			}, capabilities = caps }
+
+			vim.keymap.set("n", "gn", function()
+				vim.lsp.buf.rename()
+			end, { silent = true })
+
+			vim.keymap.set("n", "go", vim.lsp.buf.code_action, {})
+
+			vim.keymap.set("n", "gf", function() vim.lsp.buf.format() end)
 
 			vim.keymap.set("v", "<C-k>c", function()
 				vim.lsp.buf.code_action()
