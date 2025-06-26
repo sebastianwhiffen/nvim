@@ -18,7 +18,7 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup {
-				ensure_installed = { "lua_ls", "rust_analyzer" , "kotlin-lsp"},
+				ensure_installed = { "lua_ls", "rust_analyzer" },
 			}
 
 			vim.keymap.set("n", "gd", function()
