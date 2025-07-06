@@ -2,6 +2,8 @@ require("config.lazy")
 
 vim.opt.clipboard = "unnamedplus"
 vim.opt.shiftwidth = 4
+vim.o.laststatus = 2
+vim.o.statusline  = "%F"
 
 -- absolute line numbers
 vim.opt.number = true
