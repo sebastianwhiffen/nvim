@@ -15,13 +15,13 @@ vim.g.mapleader = " "
 vim.g.netrw_keepdir = 0
 
 -- automatically `:cd` to the file’s folder on every buffer enter
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    local dir = vim.fn.expand("%:p:h")
-    if vim.fn.isdirectory(dir) == 1 then
-      vim.cmd("silent! cd " .. dir)
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   callback = function()
+--     local dir = vim.fn.expand("%:p:h")
+--     if vim.fn.isdirectory(dir) == 1 then
+--       vim.cmd("silent! cd " .. dir)
+--     end
+--   end,
+-- })
 
 
