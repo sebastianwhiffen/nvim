@@ -57,6 +57,37 @@ return {
 
 			vim.keymap.set("n", "gf", function() vim.lsp.buf.format() end)
 
+			-- fuckass lsp <3	
+			vim.keymap.set('n', 'gl', function()
+				vim.cmd('LspRestart')
+			end, { noremap = true, silent = true })
+
+			local function filterDuplicates(array)
+				local uniqueArray = {}
+				for _, tableA in ipairs(array) do
+					local isDuplicate = false
+					for _, tableB in ipairs(uniqueArray) do
+						if vim.deep_equal(tableA, tableB) then
+							isDuplicate = true
+							break
+						end
+					end
+					if not isDuplicate then
+						table.insert(uniqueArray, tableA)
+					end
+				end
+				return uniqueArray
+			end
+
+			local function on_list(options)
+				options.items = filterDuplicates(options.items)
+				vim.fn.setqflist({}, ' ', options)
+				vim.cmd('botright copen')
+			end
+
+			-- Usage
+			vim.lsp.buf.references(nil, { on_list = on_list })
+
 			vim.keymap.set("v", "<C-k>c", function()
 				vim.lsp.buf.code_action()
 			end, { silent = true })
