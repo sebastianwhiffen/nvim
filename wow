@@ -1,0 +1,7 @@
+{
+  "Lua.workspace.library": ["./lua"],
+  "Lua.diagnostics.globals": ["vim"],
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.completion.enable": true,
+  "Lua.telemetry.enable": false
+}
