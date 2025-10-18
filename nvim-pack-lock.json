@@ -1,8 +1,20 @@
 {
   "plugins": {
+    "nvim-dap": {
+      "rev": "6782b09",
+      "src": "https://codeberg.org/mfussenegger/nvim-dap.git"
+    },
+    "nvim-dap-ui": {
+      "rev": "cf91d5e",
+      "src": "https://github.com/rcarriga/nvim-dap-ui"
+    },
     "nvim-lspconfig": {
       "rev": "ac98db2",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-nio": {
+      "rev": "21f5324",
+      "src": "https://github.com/nvim-neotest/nvim-nio"
     }
   }
 }
