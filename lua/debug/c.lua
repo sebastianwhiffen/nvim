@@ -1,44 +1,26 @@
+-- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#c-c-rust-via-lldb-vscode
+
 local dap = require("dap")
 
-dap.adapters.gdb = {
-  type = "executable",
-  command = "gdb",
-  args = { "-i", "dap" },
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/Library/Developer/CommandLineTools/usr/bin/lldb-dap',
+  name = 'lldb'
 }
 
+
+
+local dap = require('dap')
 dap.configurations.c = {
-	{
-		name = "Launch",
-		type = "gdb",
-		request = "launch",
-		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-		end,
-		args = {}, -- provide arguments if needed
-		cwd = "${workspaceFolder}",
-		stopAtBeginningOfMainSubprogram = false,
-	},
-	{
-		name = "Select and attach to process",
-		type = "gdb",
-		request = "attach",
-		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-		end,
-		pid = function()
-			local name = vim.fn.input('Executable name (filter): ')
-			return require("dap.utils").pick_process({ filter = name })
-		end,
-		cwd = '${workspaceFolder}'
-	},
-	{
-		name = 'Attach to gdbserver :1234',
-		type = 'gdb',
-		request = 'attach',
-		target = 'localhost:1234',
-		program = function()
-			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-		end,
-		cwd = '${workspaceFolder}'
-	}
+  {
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = true,
+    args = {},
+  },
 }

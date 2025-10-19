@@ -1,2 +1,2 @@
-require("config.keymaps");
 require("config.packages");
+require("config.keymaps");
