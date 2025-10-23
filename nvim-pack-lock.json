@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "flygrep.nvim": {
+      "rev": "9584a79",
+      "src": "https://github.com/wsdjeg/flygrep.nvim"
+    },
     "nvim-dap": {
       "rev": "6782b09",
       "src": "https://codeberg.org/mfussenegger/nvim-dap.git"
@@ -15,6 +19,10 @@
     "nvim-nio": {
       "rev": "21f5324",
       "src": "https://github.com/nvim-neotest/nvim-nio"
+    },
+    "nvim-treesitter-context": {
+      "rev": "ec308c7",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     }
   }
 }
