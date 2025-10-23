@@ -5,6 +5,7 @@ vim.pack.add{
   { src = 'https://github.com/nvim-neotest/nvim-nio' },
   { src = 'https://github.com/wsdjeg/flygrep.nvim'},
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-context'},
+  { src = 'https://github.com/rebelot/kanagawa.nvim'},
 }
 
 

@@ -4,6 +4,10 @@
       "rev": "9584a79",
       "src": "https://github.com/wsdjeg/flygrep.nvim"
     },
+    "kanagawa.nvim": {
+      "rev": "aef7f5c",
+      "src": "https://github.com/rebelot/kanagawa.nvim"
+    },
     "nvim-dap": {
       "rev": "6782b09",
       "src": "https://codeberg.org/mfussenegger/nvim-dap.git"
