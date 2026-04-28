@@ -1,6 +1,4 @@
-require("lsp.lua")
-local keymap = require("config.keymaps")
-
+require("lsp.lsp_config")
 -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
 

@@ -11,6 +11,8 @@ dap.adapters.lldb = {
 
 
 local dap = require('dap')
+
+local cwd;
 dap.configurations.c = {
   {
     name = 'Launch',
@@ -19,7 +21,10 @@ dap.configurations.c = {
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
-    cwd = '${workspaceFolder}',
+    cwd = function()
+    print(vim.fn.getcwd())
+    return vim.fn.getcwd()
+    end,
     stopOnEntry = true,
     args = {},
   },
