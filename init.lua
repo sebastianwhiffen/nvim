@@ -1,0 +1,2 @@
+vim.print('Hello Sexy')
+
