@@ -2,13 +2,14 @@ require('lsp_configs.lua_lsp_config')
 
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('roslyn_ls')
+vim.lsp.enable('html')
+vim.lsp.enable('tsgo')
 
 vim.keymap.set("n", "gf", vim.lsp.buf.format)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.keymap.set("i", "<Tab>", function()
   return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>"
 end, { expr = true })
-
 
 
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
