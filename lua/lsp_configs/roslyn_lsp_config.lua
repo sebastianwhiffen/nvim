@@ -4,7 +4,7 @@ local fs = vim.fs
 vim.lsp.config('roslyn_ls', {
   cmd = {
     'dotnet',
-    '/usr/local/bin/Microsoft.CodeAnalysis.LanguageServer.Linux-x64/Microsoft.CodeAnalysis.LanguageServer.dll',
+    vim.env.ROSLYN_LANGUAGE_SERVER,
     '--logLevel',
     'Information',
     '--extensionLogDirectory',
