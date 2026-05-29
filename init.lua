@@ -1,6 +1,7 @@
 require('vim._core.ui2').enable({})
 require('lsp_configs')
 require('packages')
+require('dap_conf')
 local builtin = require('telescope.builtin')
 
 vim.g.mapleader = " "

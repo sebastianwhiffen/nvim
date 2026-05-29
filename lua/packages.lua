@@ -1,7 +1,10 @@
+vim.pack.add({ 'https://github.com/nvim-telescope/telescope.nvim'})
+vim.pack.add({ 'https://github.com/nvim-lua/plenary.nvim' })
+vim.pack.add({ 'https://github.com/nvim-neotest/nvim-nio' })
+vim.pack.add({ 'https://github.com/rcarriga/nvim-dap-ui' })
 vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
 vim.pack.add({ 'https://github.com/vague-theme/vague.nvim' })
-vim.pack.add({
-  'https://github.com/nvim-lua/plenary.nvim',
-  'https://github.com/nvim-telescope/telescope.nvim',
-})
+vim.pack.add({ 'https://github.com/mfussenegger/nvim-dap' })
+vim.pack.add({ 'https://github.com/folke/snacks.nvim' })
+vim.pack.add({ 'https://github.com/tedkat/nvim-dap-dotnet' })
 
