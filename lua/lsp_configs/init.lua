@@ -5,6 +5,7 @@ require('lsp_configs.html_lsp_config')
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('roslyn_ls')
 vim.lsp.enable('html')
+vim.lsp.enable('bashls')
 vim.lsp.enable('tsgo')
 
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
