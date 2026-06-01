@@ -5,7 +5,7 @@ require('dap_conf')
 local builtin = require('telescope.builtin')
 
 vim.g.mapleader = " "
-vim.g.netrw_browse_split = 1
+-- vim.g.netrw_browse_split = 1
 
 vim.opt.number = true
 vim.opt.relativenumber = true
