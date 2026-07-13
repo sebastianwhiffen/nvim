@@ -1,47 +1,38 @@
 local dap = require("dap")
 local dapui = require("dapui")
-local dap_dotnet = require("nvim-dap-dotnet")
+
 dapui.setup()
 
-
 dap.adapters.netcoredbg = { type = "executable", command = "netcoredbg", args = { "--interpreter=vscode" }, }
+
 dap.configurations.cs = {
     {
+        name = "dbg snowdrift",
         type = "netcoredbg",
-        name = "Auto Run Artifact",
         request = "launch",
+
         program = function()
-            return
-                dap_dotnet.build_artifact_dll_path()
+            return os.getenv("GODOT")
         end,
-        cwd = "${fileDirname}",
-        env = {
-            ASPNETCORE_ENVIRONMENT = "Development",
-            ASPNETCORE_HOSTINGSTARTUPASSEMBLIES =
-            "Microsoft.AspNetCore.Watch.BrowserRefresh;Microsoft.AspNetCore.SpaProxy;Microsoft.WebTools.BrowserLink.Net",
-            ASPNETCORE_HTTPS_PORT = "5001",
-            ASPNETCORE_URLS = "https://localhost:5001;http://localhost:5000",
+        args = {
+            "--path",
+            os.getenv("SNOWDRIFT") .. "src/snowdrift.godot",
         },
+
+        cwd = "${workspaceFolder}",
+        stopAtEntry = false,
     },
     {
+        name = "dbg dll",
         type = "netcoredbg",
-        name = "Godot: Run Project",
         request = "launch",
         program = function()
-            return vim.env.GODOT;
+            return vim.fn.input("path: ", vim.fn.getcwd())
         end,
-        args = function()
-            return {
-                "--headless",
-                "--path",
-                "${fileDirname}",
-            }
-        end,
-        cwd = "${fileDirname}",
-        env = {},
-    },
+        cwd = "${workspaceFolder}",
+        stopAtEntry = false,
+    }
 }
-
 
 dap.listeners.before.attach.dapui_config = function() dapui.open() end
 dap.listeners.before.launch.dapui_config = function() dapui.open() end
