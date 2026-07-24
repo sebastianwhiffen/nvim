@@ -3,7 +3,7 @@ local fs = vim.fs
 
 vim.lsp.config('roslyn_ls', {
     cmd = {
-        vim.env.ROSLYN_LANGUAGE_SERVER,
+        'roslyn-language-server',
         '--logLevel',
         'Information',
         '--extensionLogDirectory',
@@ -21,9 +21,10 @@ vim.lsp.config('roslyn_ls', {
         },
 
         ["csharp|background_analysis"] = {
-            dotnet_analyzer_diagnostics_scope = "fullSolution",
+            dotnet_analyzer_diagnostics_scope = "openFiles",
             dotnet_compiler_diagnostics_scope = "fullSolution",
         },
+            -- "fullSolution" "openFiles"
     },
 
     root_markers = {
