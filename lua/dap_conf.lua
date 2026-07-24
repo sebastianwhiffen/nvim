@@ -15,9 +15,9 @@ dap.configurations.cs = {
             return os.getenv("GODOT")
         end,
         args = {
+            "--headless",
             "--path",
-            os.getenv("SNOWDRIFT") .. "src/snowdrift.godot",
-        },
+            os.getenv("SNOWDRIFT") .. "src/snowdrift.godot" },
 
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
@@ -27,7 +27,11 @@ dap.configurations.cs = {
         type = "netcoredbg",
         request = "launch",
         program = function()
-            return vim.fn.input("path: ", vim.fn.getcwd())
+            return vim.fn.input({
+               prompt = "path: ",
+               default = vim.fn.getcwd(),
+               completion = "file", -- or "dir"
+             })
         end,
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
