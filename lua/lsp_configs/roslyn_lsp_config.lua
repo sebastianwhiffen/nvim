@@ -28,6 +28,7 @@ vim.lsp.config('roslyn_ls', {
     },
 
     root_markers = {
+        'dummy_dotnet_root',
         '*.sln',
         '*.csproj',
     },

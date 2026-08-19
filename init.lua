@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 
 require('vim._core.ui2').enable({})
 require('lsp_configs')
@@ -6,7 +7,8 @@ require('dap_conf')
 
 local builtin = require('telescope.builtin')
 
-vim.g.mapleader = " "
+vim.opt_local.spelllang = "en_us"
+
 vim.g.netrw_keepj = ""
 -- vim.g.netrw_browse_split = 1
 
@@ -20,7 +22,6 @@ vim.o.smartindent = true -- syntax aware indentations for newline inserts
 vim.o.tabstop = 4        -- num of space characters per tab
 vim.o.shiftwidth = 4     -- spaces per indentation level
 
-
 vim.keymap.set('n', '<leader>vs', ":vsplit<CR>", { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>s', ":split<CR>", { desc = 'Telescope find files' })
 
@@ -28,7 +29,6 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 
-vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action, {})
 
 vim.keymap.set('n', ']e', function()
   vim.diagnostic.get_next({ severity = vim.diagnostic.severity.ERROR })
@@ -40,6 +40,73 @@ end, { desc = 'Go to previous error' })
 
 vim.keymap.set('n', '<leader>t', function() vim.cmd('rightbelow vsplit | terminal') end)
 
+vim.keymap.set("n", "<leader>x", function()
+    vim.opt_local.spell = not vim.opt_local.spell:get()
+end)
+
 vim.cmd.colorscheme('vague')
 
+-- vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action, {})
+-- if you see this, vibe coding turns your brain to liquid; but idgaf abt my config. optimal for escaping microslops products.
+-- the irony is puzzling.
+vim.keymap.set("n", "<leader>.", function()
+    local original_select = vim.ui.select
+
+    vim.ui.select = function(items, opts, on_choice)
+        vim.ui.select = original_select
+
+        local merged = {}
+
+        -- LSP actions first
+        for _, item in ipairs(items) do
+            table.insert(merged, item)
+        end
+
+        -- Only add spelling suggestions when spellcheck is enabled
+        if vim.opt_local.spell:get() then
+            local word = vim.fn.expand("<cword>")
+            local suggestions = vim.fn.spellsuggest(word)
+
+            for _, suggestion in ipairs(suggestions) do
+                table.insert(merged, {
+                    __spell = true,
+                    suggestion = suggestion,
+                })
+            end
+        end
+
+        local original_format_item = opts.format_item
+
+        opts.format_item = function(item)
+            if item.__spell then
+                return "Spelling: " .. item.suggestion
+            end
+
+            if original_format_item then
+                return original_format_item(item)
+            end
+
+            return tostring(item)
+        end
+
+        original_select(merged, opts, function(choice, index)
+            if not choice then
+                return
+            end
+
+            if choice.__spell then
+                vim.cmd("normal! ciw" .. choice.suggestion)
+                return
+            end
+
+            on_choice(choice, index)
+        end)
+    end
+
+    vim.lsp.buf.code_action()
+end)
+
+vim.keymap.set("n", "<leader>x", function()
+    vim.opt_local.spell = not vim.opt_local.spell:get()
+end)
 vim.print('Hello Sexy')
