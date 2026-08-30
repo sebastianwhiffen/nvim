@@ -11,7 +11,17 @@ vim.lsp.enable('tsgo')
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "popup" }
 
 vim.keymap.set("n", "gf", vim.lsp.buf.format)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+
+vim.keymap.set('n', 'gd', function()
+    vim.lsp.buf.definition({
+        on_list = function(options)
+            vim.fn.setqflist({}, ' ', options)
+            vim.cmd('cfirst')
+            vim.cmd('normal! zt')
+        end,
+    })
+end)
+
 vim.keymap.set('n', 'gh', vim.diagnostic.open_float)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references)
 
