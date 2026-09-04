@@ -31,3 +31,20 @@ vim.api.nvim_set_hl(0, "TabLineSel", {
     fg = "#F89820",
     bold = true,
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    once = true,
+    callback = function()
+        vim.schedule(function()
+            local original_tab = vim.api.nvim_get_current_tabpage()
+            local config_dir = vim.fn.expand("~/.config/nvim")
+            local init_file = config_dir .. "/init.lua"
+
+            vim.cmd("tabnew")
+            vim.cmd("tcd " .. vim.fn.fnameescape(config_dir))
+            vim.cmd("edit " .. vim.fn.fnameescape(init_file))
+
+            vim.api.nvim_set_current_tabpage(original_tab)
+        end)
+    end,
+})
