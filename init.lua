@@ -5,7 +5,12 @@ require('lsp_configs')
 require('packages')
 require('dap_conf')
 
+vim.cmd.colorscheme('vague')
+require('file_tabline')
+
 local builtin = require('telescope.builtin')
+
+vim.opt.sessionoptions:append("tabpages")
 
 vim.opt_local.spelllang = "en_us"
 
@@ -22,29 +27,35 @@ vim.o.smartindent = true -- syntax aware indentations for newline inserts
 vim.o.tabstop = 4        -- num of space characters per tab
 vim.o.shiftwidth = 4     -- spaces per indentation level
 
-vim.keymap.set('n', '<leader>vs', ":vsplit<CR>", { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>s', ":split<CR>", { desc = 'Telescope find files' })
+-- vim.keymap.set("n", "", "<cmd>tabclose<CR>")
+-- vim.keymap.set("n", "", "<cmd>tabnew<CR>")
+vim.keymap.set("n", "}", "<cmd>tabnext<CR>")
+vim.keymap.set("n", "{", "<cmd>tabprevious<CR>")
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>vs', ":vsplit<CR>")
+vim.keymap.set('n', '<leader>s', ":split<CR>")
+
+vim.keymap.set('n', '<leader>ff', builtin.find_files)
+vim.keymap.set('n', '<leader>fg', builtin.live_grep)
+vim.keymap.set('n', '<leader>fb', builtin.buffers)
 
 
 vim.keymap.set('n', ']e', function()
-  vim.diagnostic.get_next({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.get_next({ severity = vim.diagnostic.severity.ERROR })
 end, { desc = 'Go to next error' })
 
 vim.keymap.set('n', '[e', function()
-  vim.diagnostic.get_prev({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.get_prev({ severity = vim.diagnostic.severity.ERROR })
 end, { desc = 'Go to previous error' })
 
-vim.keymap.set('n', '<leader>t', function() vim.cmd('rightbelow vsplit | terminal') end)
+vim.keymap.set('n', '<leader>t', function()
+    vim.cmd('rightbelow vsplit | vertical resize 50% | term')
+end)
 
 vim.keymap.set("n", "<leader>x", function()
     vim.opt_local.spell = not vim.opt_local.spell:get()
 end)
 
-vim.cmd.colorscheme('vague')
 
 -- vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action, {})
 -- if you see this, vibe coding turns your brain to liquid; but idgaf abt my config. optimal for escaping microslops products.

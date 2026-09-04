@@ -4,6 +4,10 @@
       "rev": "131a558e13f9f28b15cd235557150ccb23f89286",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
+    "netcoredbg-macOS-arm64.nvim": {
+      "rev": "90c6fe7fa864cd753670fcd95b229da261760bc1",
+      "src": "https://github.com/Cliffback/netcoredbg-macOS-arm64.nvim"
+    },
     "nvim-dap": {
       "rev": "531771530d4f82ad2d21e436e3cc052d68d7aebb",
       "src": "https://github.com/mfussenegger/nvim-dap"
